@@ -55,3 +55,14 @@ veiculosRouter.put("/:id", async (req, res) => {
         res.status(500).json({ error: "Erro ao atualizar veículo "})
     }
 });
+
+veiculosRouter.patch("/:id", async (req, res) => {
+    const veiculoId = req.params.id
+    try {
+        const veiculoAtualizado = await veiculosServices.updateKnex(veiculoId, req.body)
+         res.status(201).json(veiculoAtualizado);
+    }catch (error) {
+        console.error (error)
+        res.status(500).json({ error: "Erro ao atualizar veículo "})
+    }
+})
